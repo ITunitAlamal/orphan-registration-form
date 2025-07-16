@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>نموذج تسجيل أسر الأيتام</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+        .form-section {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="file"],
+        select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .orphan-member {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .add-member-btn {
+            background-color: #27ae60;
+            margin-bottom: 20px;
+        }
+        .add-member-btn:hover {
+            background-color: #219653;
+        }
+        .hidden {
+            display: none;
+        }
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        .file-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+        .attachment-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+        }
+        .health-details {
+            background-color: #f0f8ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center; margin-bottom: 20px;">
+<img alt="شعار الجمعية" src="logo.png" style="max-width: 250px; height: auto; display: block; margin: 0 auto 10px;"/>
+<h1>جمعية معهد الأمل للأيتام - نموذج تسجيل بيانات الأيتام</h1>
+</div>
+<form id="submitOrphanForm">
+<!-- قسم حالة اليتم الجديد -->
+<!-- بيانات الوصي الشرعي على الأيتام -->
+<div class="form-section">
+<h2>بيانات الوصي الشرعي على الأيتام (إلزامي)</h2>
+<div class="form-group">
+<label class="required" for="guardianName">اسم الوصي الرباعي</label>
+<input id="guardianName" name="guardianName" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="required" for="guardianId">رقم هوية الوصي</label>
+<input id="guardianId" name="guardianId" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="required" for="guardianIdPhoto">صورة هوية الوصي</label>
+<input accept="image/*" id="guardianIdPhoto" name="guardianIdPhoto" required="" type="file"/>
+<div class="file-preview" id="guardianIdPhotoPreview"></div>
+</div>
+<div class="form-group">
+<label class="required" for="guardianDob">تاريخ ميلاد الوصي</label>
+<input id="guardianDob" name="guardianDob" required="" type="date"/>
+</div>
+<div class="form-group">
+<label class="required" for="guardianRelation">صلة القرابة بالأيتام</label>
+<select id="guardianRelation" name="guardianRelation" required="">
+<option value="">اختر صلة القرابة</option>
+<option value="أب">أب</option>
+<option value="أخ">أخ</option>
+<option value="جد">جد</option>
+<option value="عم">عم</option>
+<option value="خال">خال</option>
+<option value="ابن عم">ابن عم</option>
+<option value="ابن خال">ابن خال</option>
+<option value="أقارب">أقارب</option>
+<option value="غير ذلك">غير ذلك</option>
+</select>
+</div>
+<div class="form-group">
+<label class="required" for="guardianEducation">المستوى التعليمي للوصي</label>
+<select id="guardianEducation" name="guardianEducation" required="">
+<option value="">اختر المستوى التعليمي</option>
+<option value="أمي">أمي</option>
+<option value="ابتدائي">ابتدائي</option>
+<option value="إعدادي">إعدادي</option>
+<option value="ثانوي">ثانوي</option>
+<option value="دبلوم">دبلوم</option>
+<option value="بكالوريوس">بكالوريوس</option>
+<option value="دراسات عليا">دراسات عليا</option>
+</select>
+</div>
+<div class="form-group">
+<label class="required" for="guardianStatus">الحالة الاجتماعية</label>
+<select id="guardianStatus" name="guardianStatus" required="">
+<option value="">اختر الحالة الاجتماعية</option>
+<option value="أعزب">أعزب</option>
+<option value="متزوج">متزوج</option>
+<option value="مطلق">مطلق</option>
+<option value="أرمل">أرمل</option>
+</select>
+</div>
+<div class="form-group">
+<label class="required" for="guardianHealth">الحالة الصحية</label>
+<select id="guardianHealth" name="guardianHealth" required="">
+<option value="">اختر الحالة الصحية</option>
+<option value="معافى">معافى</option>
+<option value="مريض">مريض</option>
+<option value="ذو إعاقة">ذو إعاقة</option>
+<option value="مصاب حرب">مصاب حرب</option>
+</select>
+</div>
+<div class="hidden" id="guardianHealthDetailsContainer">
+<div class="form-group health-details">
+<label for="guardianHealthDetails">تفاصيل الحالة الصحية</label>
+<textarea id="guardianHealthDetails" name="guardianHealthDetails" placeholder="الرجاء توضيح طبيعة المرض/الإعاقة/الإصابة"></textarea>
+</div>
+<div class="form-group health-details">
+<label for="guardianHealthNeeds">الاحتياجات الصحية</label>
+<textarea id="guardianHealthNeeds" name="guardianHealthNeeds" placeholder="الرجاء ذكر الاحتياجات الصحية إن وجدت"></textarea>
+</div>
+</div>
+<div class="form-group">
+<label class="required" for="guardianJob">طبيعة العمل</label>
+<select id="guardianJob" name="guardianJob" required="">
+<option value="">اختر طبيعة العمل</option>
+<option value="موظف حكومي">موظف حكومي</option>
+<option value="قطاع خاص">قطاع خاص</option>
+<option value="عامل يومية">عامل يومية</option>
+<option value="عمل حر">عمل حر</option>
+<option value="لا يعمل">لا يعمل</option>
+<option value="متقاعد">متقاعد</option>
+<option value="غير ذلك">غير ذلك</option>
+</select>
+</div>
+<div class="hidden" id="guardianJobOtherContainer">
+<div class="form-group">
+<label class="required" for="guardianJobOther">الرجاء توضيح طبيعة العمل</label>
+<input id="guardianJobOther" name="guardianJobOther" type="text"/>
+</div>
+</div>
+<div class="form-group">
+<label class="required">هل الوصاية موثقة قانوناً؟</label>
+<div class="radio-group">
+<div class="radio-option">
+<input id="legalGuardianYes" name="legalGuardian" required="" type="radio" value="نعم"/>
+<label for="legalGuardianYes">نعم</label>
+</div>
+<div class="radio-option">
+<input id="legalGuardianNo" name="legalGuardian" type="radio" value="لا"/>
+<label for="legalGuardianNo">لا</label>
+</div>
+</div>
+</div>
+<div class="hidden" id="legalGuardianDetails">
+<div class="form-group">
+<label class="required" for="guardianshipDocument">حجة الوصاية/الولاية</label>
+<input accept=".pdf,.jpg,.jpeg,.png" id="guardianshipDocument" name="guardianshipDocument" required="" type="file"/>
+<div class="file-preview" id="guardianshipDocumentPreview"></div>
+</div>
+<div class="form-group">
+<label class="required" for="guardianshipNumber">رقم حجة الوصاية</label>
+<input id="guardianshipNumber" name="guardianshipNumber" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="required" for="guardianshipDate">تاريخ حجة الوصاية</label>
+<input id="guardianshipDate" name="guardianshipDate" required="" type="date"/>
+</div>
+<div class="form-group">
+<label class="required" for="guardianshipCourt">المحكمة المصدقة</label>
+<input id="guardianshipCourt" name="guardianshipCourt" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- بيانات الأب المتوفي -->
+<div class="form-section">
+<h2>بيانات الأب المتوفي (إلزامي)</h2>
+<div class="form-group">
+<label class="required" for="fatherName">اسم الأب الرباعي</label>
+<input id="fatherName" name="fatherName" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="required" for="fatherId">رقم هوية الأب</label>
+<input id="fatherId" name="fatherId" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="required" for="fatherIdPhoto">صورة هوية الأب</label>
+<input accept="image/*" id="fatherIdPhoto" name="fatherIdPhoto" required="" type="file"/>
+<div class="file-preview" id="fatherIdPhotoPreview"></div>
+</div>
+<div class="form-group">
+<label class="required" for="fatherDob">تاريخ ميلاد الأب</label>
+<input id="fatherDob" name="fatherDob" required="" type="date"/>
+</div>
+<div class="form-group">
+<label class="required" for="fatherDeathDate">تاريخ الوفاة</label>
+<input id="fatherDeathDate" name="fatherDeathDate" required="" type="date"/>
+</div>
+<div class="form-group">
+<label class="required" for="fatherDeathCertificate">شهادة وفاة الأب</label>
+<input accept=".pdf,.jpg,.jpeg,.png" id="fatherDeathCertificate" name="fatherDeathCertificate" required="" type="file"/>
+<div class="file-preview" id="fatherDeathCertificatePreview"></div>
+</div>
+<div class="form-group">
+<label for="fatherEducation">المستوى التعليمي</label>
+<select id="fatherEducation" name="fatherEducation">
+<option value="">اختر المستوى التعليمي</option>
+<option value="أمي">أمي</option>
+<option value="ابتدائي">ابتدائي</option>
+<option value="إعدادي">إعدادي</option>
+<option value="ثانوي">ثانوي</option>
+<option value="دبلوم">دبلوم</option>
+<option value="بكالوريوس">بكالوريوس</option>
+<option value="دراسات عليا">دراسات عليا</option>
+</select>
+</div>
+<div class="form-group">
+<label for="fatherJob">طبيعة العمل قبل الوفاة</label>
+<select id="fatherJob" name="fatherJob">
+<option value="">اختر طبيعة العمل</option>
+<option value="موظف حكومي">موظف حكومي</option>
+<option value="قطاع خاص">قطاع خاص</option>
+<option value="عامل يومية">عامل يومية</option>
+<option value="عمل حر">عمل حر</option>
+<option value="لا يعمل">لا يعمل</option>
+<option value="متقاعد">متقاعد</option>
+<option value="غير ذلك">غير ذلك</option>
+</select>
+</div>
+<div class="form-group">
+<label for="fatherHealth">الحالة الصحية قبل الوفاة</label>
+<select id="fatherHealth" name="fatherHealth">
+<option value="">اختر الحالة الصحية</option>
+<option value="معافى">معافى</option>
+<option value="مريض">مريض</option>
+<option value="ذو إعاقة">ذو إعاقة</option>
+<option value="مصاب حرب">مصاب حرب</option>
+</select>
+</div>
+<div class="hidden" id="fatherHealthDetailsContainer">
+<div class="form-group health-details">
+<label for="fatherHealthDetails">تفاصيل الحالة الصحية</label>
+<textarea id="fatherHealthDetails" name="fatherHealthDetails" placeholder="الرجاء توضيح طبيعة المرض/الإعاقة/الإصابة"></textarea>
+</div>
+</div>
+<div class="form-group">
+<label for="fatherDeathReason">سبب الوفاة</label>
+<select id="fatherDeathReason" name="fatherDeathReason">
+<option value="">اختر سبب الوفاة</option>
+<option value="مرض">مرض</option>
+<option value="حادث">حادث</option>
+<option value="شهادة">شهادة</option>
+<option value="غير معروف">غير معروف</option>
+<option value="أخرى">أخرى</option>
+</select>
+</div>
+</div>
+<!-- بيانات الأم -->
+<div class="form-section">
+<h2>بيانات الأم (إن كانت على قيد الحياة)</h2>
+<div class="form-group">
+<label for="motherName">اسم الأم الرباعي</label>
+<input id="motherName" name="motherName" type="text"/>
+</div>
+<div class="form-group">
+<label for="motherId">رقم هوية الأم</label>
+<input id="motherId" name="motherId" type="text"/>
+</div>
+<div class="form-group">
+<label for="motherIdPhoto">صورة هوية الأم</label>
+<input accept="image/*" id="motherIdPhoto" name="motherIdPhoto" type="file"/>
+<div class="file-preview" id="motherIdPhotoPreview"></div>
+</div>
+<div class="form-group">
+<label for="motherDob">تاريخ ميلاد الأم</label>
+<input id="motherDob" name="motherDob" type="date"/>
+</div>
+<div class="form-group">
+<label for="motherStatus">الحالة الاجتماعية</label>
+<select id="motherStatus" name="motherStatus">
+<option value="">اختر الحالة الاجتماعية</option>
+<option value="متزوجة">متزوجة</option>
+<option value="مطلقة">مطلقة</option>
+<option value="أرملة">أرملة</option>
+<option value="منفصلة">منفصلة</option>
+</select>
+</div>
+<div class="form-group">
+<label for="motherEducation">المستوى التعليمي</label>
+<select id="motherEducation" name="motherEducation">
+<option value="">اختر المستوى التعليمي</option>
+<option value="أمية">أمية</option>
+<option value="ابتدائي">ابتدائي</option>
+<option value="إعدادي">إعدادي</option>
+<option value="ثانوي">ثانوي</option>
+<option value="دبلوم">دبلوم</option>
+<option value="بكالوريوس">بكالوريوس</option>
+<option value="دراسات عليا">دراسات عليا</option>
+</select>
+</div>
+<div class="form-group">
+<label for="motherHealth">الحالة الصحية</label>
+<select id="motherHealth" name="motherHealth">
+<option value="">اختر الحالة الصحية</option>
+<option value="معافاة">معافاة</option>
+<option value="مريضة">مريضة</option>
+<option value="ذات إعاقة">ذات إعاقة</option>
+<option value="غير ذلك">غير ذلك</option>
+</select>
+</div>
+<div class="hidden" id="motherHealthDetailsContainer">
+<div class="form-group health-details">
+<label for="motherHealthDetails">تفاصيل الحالة الصحية</label>
+<textarea id="motherHealthDetails" name="motherHealthDetails" placeholder="الرجاء توضيح طبيعة المرض/الإعاقة"></textarea>
+</div>
+</div>
+<div class="form-group">
+<label for="motherJob">طبيعة العمل</label>
+<select id="motherJob" name="motherJob">
+<option value="">اختر طبيعة العمل</option>
+<option value="موظفة حكومية">موظفة حكومية</option>
+<option value="قطاع خاص">قطاع خاص</option>
+<option value="عمل حر">عمل حر</option>
+<option value="لا تعمل">لا تعمل</option>
+<option value="ربة منزل">ربة منزل</option>
+</select>
+</div>
+<div class="form-group">
+<label for="motherDeathCertificate">شهادة وفاة الأم (إن كانت متوفية)</label>
+<input accept=".pdf,.jpg,.jpeg,.png" id="motherDeathCertificate" name="motherDeathCertificate" type="file"/>
+<div class="file-preview" id="motherDeathCertificatePreview"></div>
+</div>
+</div>
+<!-- بيانات الأيتام -->
+<div class="form-section">
+<h2>بيانات الأيتام (إلزامي)</h2>
+<p>يرجى إدخال بيانات جميع الأيتام في الأسرة</p>
+<div class="form-group">
+<label class="required" for="orphansCount">عدد الأيتام</label>
+<input id="orphansCount" min="1" name="orphansCount" required="" type="number"/>
+</div>
+<div id="orphansContainer">
+<!-- سيتم إضافة الأيتام هنا ديناميكياً -->
+</div>
+<button class="add-member-btn" id="addOrphanBtn" type="button">إضافة يتيم جديد</button>
+</div>
+<!-- البيانات الاقتصادية -->
+<div class="form-section">
+<h2>البيانات الاقتصادية للأسرة</h2>
+<div class="form-group">
+<label for="incomeSource">مصدر الدخل الأساسي للأسرة</label>
+<select id="incomeSource" name="incomeSource">
+<option value="">اختر مصدر الدخل</option>
+<option value="راتب الوصي">راتب الوصي</option>
+<option value="راتب الأم">راتب الأم</option>
+<option value="مساعدات إنسانية">مساعدات إنسانية</option>
+<option value="راتب تقاعد">راتب تقاعد</option>
+<option value="كفالات الأيتام">كفالات الأيتام</option>
+<option value="مساعدات شؤون اجتماعية">مساعدات شؤون اجتماعية</option>
+<option value="راتب جريح">راتب جريح</option>
+<option value="راتب شهيد">راتب شهيد</option>
+<option value="غير ذلك">غير ذلك</option>
+</select>
+</div>
+<div class="form-group">
+<label for="otherIncomeSources">مصادر دخل أخرى (إن وجدت)</label>
+<textarea id="otherIncomeSources" name="otherIncomeSources" placeholder="الرجاء ذكر مصادر الدخل الأخرى للأسرة"></textarea>
+</div>
+<div class="form-group">
+<label for="monthlyIncome">معدل الدخل الشهري بالشيكل</label>
+<select id="monthlyIncome" name="monthlyIncome">
+<option value="">اختر فئة الدخل</option>
+<option value="أقل من 1000 شيكل">أقل من 1000 شيكل</option>
+<option value="1000-1500 شيكل">1000-1500 شيكل</option>
+<option value="1500-2000 شيكل">1500-2000 شيكل</option>
+<option value="2000-3000 شيكل">2000-3000 شيكل</option>
+<option value="3000-5000 شيكل">3000-5000 شيكل</option>
+<option value="أكثر من 5000 شيكل">أكثر من 5000 شيكل</option>
+</select>
+</div>
+<div class="form-group">
+<label>هل تتلقى الأسرة مساعدات من مؤسسات أخرى؟</label>
+<div class="radio-group">
+<div class="radio-option">
+<input id="otherAidYes" name="otherAid" type="radio" value="نعم"/>
+<label for="otherAidYes">نعم</label>
+</div>
+<div class="radio-option">
+<input id="otherAidNo" name="otherAid" type="radio" value="لا"/>
+<label for="otherAidNo">لا</label>
+</div>
+</div>
+</div>
+<div class="hidden" id="otherAidDetails">
+<div class="form-group">
+<label for="aidOrganizations">أسماء المؤسسات المانحة</label>
+<textarea id="aidOrganizations" name="aidOrganizations" placeholder="الرجاء ذكر أسماء المؤسسات التي تقدم المساعدات للأسرة"></textarea>
+</div>
+<div class="form-group">
+<label for="aidType">نوع المساعدات المقدمة</label>
+<div class="checkbox-group">
+<div class="checkbox-option">
+<input id="aidFinancial" name="aidType" type="checkbox" value="مالية"/>
+<label for="aidFinancial">مالية</label>
+</div>
+<div class="checkbox-option">
+<input id="aidFood" name="aidType" type="checkbox" value="غذائية"/>
+<label for="aidFood">غذائية</label>
+</div>
+<div class="checkbox-option">
+<input id="aidEducation" name="aidType" type="checkbox" value="تعليمية"/>
+<label for="aidEducation">تعليمية</label>
+</div>
+<div class="checkbox-option">
+<input id="aidHealth" name="aidType" type="checkbox" value="طبية"/>
+<label for="aidHealth">طبية</label>
+</div>
+<div class="checkbox-option">
+<input id="aidOther" name="aidType" type="checkbox" value="أخرى"/>
+<label for="aidOther">أخرى</label>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label for="aidAmount">قيمة المساعدات الشهرية (إن كانت مالية)</label>
+<input id="aidAmount" name="aidAmount" placeholder="بالشيكل" type="text"/>
+</div>
+</div>
+<div class="form-group">
+<label>يكفي الدخل لتغطية الاحتياجات الأساسية؟</label>
+<div class="radio-group">
+<div class="radio-option">
+<input id="incomeEnoughYes" name="incomeEnough" type="radio" value="نعم"/>
+<label for="incomeEnoughYes">نعم</label>
+</div>
+<div class="radio-option">
+<input id="incomeEnoughNo" name="incomeEnough" type="radio" value="لا"/>
+<label for="incomeEnoughNo">لا</label>
+</div>
+<div class="radio-option">
+<input id="incomeEnoughPartially" name="incomeEnough" type="radio" value="جزئياً"/>
+<label for="incomeEnoughPartially">جزئياً</label>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label for="urgentNeeds">الاحتياجات الاقتصادية الملحة للأسرة</label>
+<textarea id="urgentNeeds" name="urgentNeeds" placeholder="الرجاء ذكر أبرز الاحتياجات الملحة للأسرة"></textarea>
+</div>
+</div>
+<!-- بيانات الدفع الإلكتروني -->
+<div class="form-section">
+<h2>بيانات الدفع الإلكتروني</h2>
+<div class="form-group">
+<label class="required" for="paymentMethod">طريقة الدفع المفضلة</label>
+<select id="paymentMethod" name="paymentMethod" required="">
+<option value="">اختر طريقة الدفع</option>
+<option value="محفظة بال باي">محفظة بال باي</option>
+<option value="حساب بنك فلسطين">حساب بنك فلسطين</option>
+</select>
+</div>
+<div class="hidden" id="palpayDetails">
+<div class="form-group">
+<label class="required" for="palpayName">اسم صاحب المحفظة</label>
+<input id="palpayName" name="palpayName" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="required" for="palpayPhone">رقم الجوال المربوط بالمحفظة</label>
+<input id="palpayPhone" name="palpayPhone" required="" type="tel"/>
+</div>
+</div>
+<div class="hidden" id="bankDetails">
+<div class="form-group">
+<label class="required" for="bankAccountName">اسم صاحب الحساب</label>
+<input id="bankAccountName" name="bankAccountName" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="required" for="bankAccountNumber">رقم الحساب</label>
+<input id="bankAccountNumber" name="bankAccountNumber" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="required" for="bankBranch">اسم الفرع</label>
+<input id="bankBranch" name="bankBranch" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- المرفقات -->
+<div class="form-section">
+<h2>المرفقات</h2>
+<div class="form-group">
+<label for="alimonyDocument">حجة الإعالة (إن وجدت)</label>
+<input accept=".pdf,.jpg,.jpeg,.png" id="alimonyDocument" name="alimonyDocument" type="file"/>
+<div class="file-preview" id="alimonyDocumentPreview"></div>
+</div>
+<div class="form-group">
+<label for="custodyDocument">حجة الحضانة (إن وجدت)</label>
+<input accept=".pdf,.jpg,.jpeg,.png" id="custodyDocument" name="custodyDocument" type="file"/>
+<div class="file-preview" id="custodyDocumentPreview"></div>
+</div>
+<div class="form-group">
+<label for="otherDocuments">مرفقات أخرى</label>
+<input accept=".pdf,.jpg,.jpeg,.png" id="otherDocuments" multiple="" name="otherDocuments" type="file"/>
+<div class="file-preview" id="otherDocumentsPreview"></div>
+</div>
+</div>
+<button style="width: 100%; font-size: 18px; padding: 15px;" type="submit">تسجيل البيانات</button>
+</form>
+
+
+
+
+<script>
+document.getElementById('submitOrphanForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+
+  const apiToken = "Z2zkaRtlGhjOfHpEgoF2IK8xlZvVQIlGmDZP-fPs";
+  const apiUrl = "https://app.nocodb.com/api/v2/tables/msikv6iww0qbc29/records";
+
+  try {
+    const jsonData = {};
+    for (const [key, value] of formData.entries()) {
+      jsonData[key] = value;
+    }
+
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "accept": "application/json",
+        "xc-token": apiToken,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ fields: jsonData })
+    });
+
+    if (response.ok) {
+      alert("✅ تم إرسال النموذج بنجاح");
+      form.reset();
+    } else {
+      alert("❌ حدث خطأ أثناء إرسال النموذج");
+      console.error(await response.text());
+    }
+  } catch (error) {
+    alert("⚠️ فشل الاتصال بالخادم");
+    console.error(error);
+  }
+});
+</script></body>
+</html>
+
